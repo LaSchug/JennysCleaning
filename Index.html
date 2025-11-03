@@ -349,13 +349,14 @@
         <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-top:1rem;">
           <!-- Email submission button -->
           <button type="submit" class="cta-btn" style="background:#0ea5e9;border:none;color:white;padding:.7rem 1.2rem;border-radius:999px;font-weight:700;cursor:pointer;">
-            Send to Jenny’s Email
+            Submitt Request
           </button>
 
           <!-- WhatsApp button -->
           <a href="#" id="whatsappBtn" style="background:#25d366;color:white;padding:.7rem 1.2rem;border-radius:999px;font-weight:700;text-decoration:none;">
-            Message via WhatsApp
+            Submit Message via WhatsApp
           </a>
+          <p>opens WhatsApp</p>
         </div>
 
         <p class="notice" style="margin-top:1rem;">
@@ -388,7 +389,7 @@
 
       const text = `New cleaning inquiry:%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}%0ACity: ${city}%0AService: ${service}%0ADate: ${date}%0A%0AMessage:%0A${msg}`;
       const whatsappNumber = '16503894172'; // Jenny’s business number
-      const waUrl = `https://wa.me/${whatsappNumber}?text=${text}`;
+      const waUrl = `https://wa.me/${6503894172}?text=${text}`;
       window.open(waUrl, '_blank');
     });
   }
@@ -411,7 +412,7 @@
       })
       .catch((err) => {
         console.error('Form submit failed', err);
-        showToast('Hmm, something went wrong. Please email hello@jennyscleaning.com');
+        showToast('Hmm, something went wrong. Please email libby.wilke@gmail.com');
       });
     });
 
