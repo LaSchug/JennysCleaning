@@ -173,7 +173,7 @@
         </div>
       </div>
       <div class="hero-card">
-        <img src="/Users/libbywilke/images/Jenny3.jpeg" alt="Before and after cleaning photo of a kitchen stove" />
+        <img src="Jenny3.jpeg" alt="Before and after cleaning photo of a kitchen stove" />
         <div class="note">“Our kitchen has never shined like this!” — Lukas S.</div>
       </div>
     </div>
@@ -190,7 +190,7 @@
   <p>Usamos productos ecológicos y ofrecemos horarios flexibles para adaptarnos a tu ajetreado estilo de vida. Desde limpiezas profundas puntuales hasta visitas recurrentes, haremos que tu hogar brille mientras tú te relajas y disfrutas de la tranquilidad que mereces.</p>
 </div>
 <div style="flex:1 1 35%;display:flex;justify-content:center;">
-<img src="/Users/libbywilke/images/Jenny1.jpeg" alt="Jenny's Cleaning team photo" style="width:220px;height:220px;object-fit:cover;border-radius:50%;box-shadow:0 6px 20px rgba(0,0,0,0.15);" />
+<img src="Jenny1.jpeg" alt="Jenny's Cleaning team photo" style="width:220px;height:220px;object-fit:cover;border-radius:50%;box-shadow:0 6px 20px rgba(0,0,0,0.15);" />
 </div>
 </div>
 </section>
@@ -258,7 +258,7 @@
 
 <!-- Testimonial 1: IMAGE LEFT, TEXT RIGHT -->
 <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem;flex-wrap:wrap;">
-<img src="/Users/libbywilke/images/Jenny2.jpeg" alt="A sparkling clean bathroom" style="width:220px;height:220px;object-fit:cover;border-radius:16px;box-shadow:0 8px 20px rgba(0,0,0,0.1);flex:0 0 auto;order:-1;" />
+<img src="Jenny2.jpeg" alt="A sparkling clean bathroom" style="width:220px;height:220px;object-fit:cover;border-radius:16px;box-shadow:0 8px 20px rgba(0,0,0,0.1);flex:0 0 auto;order:-1;" />
 <div style="flex:1 1 300px;order:0;">
 <p style="font-size:1.1rem;line-height:1.6;">“They’re dependable, friendly, and incredibly thorough. My house sparkles every time and my kids are always so excited to see how clean it is.”</p>
 <p style="font-weight:600;margin-top:.5rem;">— Matthew S.</p>
@@ -272,7 +272,7 @@
 <p style="font-size:1.1rem;line-height:1.6;">“Booking was easy, communication was clear, and the deep clean was worth every penny. We now have Jenny and team on a regular basis!”</p>
 <p style="font-weight:600;margin-top:.5rem;">— Libby W.</p>
 </div>
-<img src="/Users/libbywilke/images/Jenny5.jpeg" alt="A squeaky clean bathtub" style="width:220px;height:220px;object-fit:cover;border-radius:16px;box-shadow:0 8px 20px rgba(0,0,0,0.1);flex:0 0 auto;order:1;" />
+<img src="Jenny5.jpeg" alt="A squeaky clean bathtub" style="width:220px;height:220px;object-fit:cover;border-radius:16px;box-shadow:0 8px 20px rgba(0,0,0,0.1);flex:0 0 auto;order:1;" />
 </div>
         </div>
       </div>
@@ -352,96 +352,51 @@
   Prefer to call? 
   <strong><a href="tel:16503894172" style="color:inherit;text-decoration:none;">(650) 389-4172</a></strong> • Mon–Fri 8am–6pm</p>
         </form>
-       <script>
-if (!win || win.closed) {
-window.location.href = mailto;
-}
-} catch (err) {
-window.location.href = mailto;
-}
-}, 1200);
+<script>
+(function () {
+  const form = document.getElementById('contactForm');
+  const WHATSAPP_NUMBER = '15306476042'; // <-- your number in E.164 (1 + area code + number)
+  const FALLBACK_EMAIL  = 'libby.wilke@gmail.com'; // <-- change to your inbox
 
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-form.reset();
-closeModal();
-});
-const data = Object.fromEntries(new FormData(form).entries());
-const name = data.name || '';
-const phone = data.phone || '';
-const email = data.email || '';
-const city = data.city || '';
-const service = data.service || '';
-const notes = data.notes || '';
+    const fd = new FormData(form);
+    const pretty =
+`New cleaning request
+Name: ${fd.get('name') || ''}
+Phone: ${fd.get('phone') || ''}
+Email: ${fd.get('email') || ''}
+City: ${fd.get('city') || ''}
+Service: ${fd.get('service') || ''}
+Sq Ft: ${fd.get('sqft') || ''}
+Frequency: ${fd.get('frequency') || ''}
+Preferred Date: ${fd.get('date') || ''}
 
-
-const pretty =
-`New cleaning request` + "
-" +
-(name ? `Name: ${name}
-` : '') +
-(phone ? `Phone: ${phone}
-` : '') +
-(email ? `Email: ${email}
-` : '') +
-(city ? `City: ${city}
-` : '') +
-(service ? `Desired Service: ${service}
-` : '') +
-(notes ? `
 Notes:
-${notes}
-` : '') +
-`
+${fd.get('message') || ''}
+
 Sent from Jenny's Cleaning website.`;
 
+    const waUrl   = `https://wa.me/$5306476042?text=${encodeURIComponent(pretty)}`;
+    const mailto  = `mailto:${FALLBACK_EMAIL}?subject=${encodeURIComponent('New Cleaning Request')}&body=${encodeURIComponent(pretty)}`;
 
-const waUrl = `https://wa.me/15306476042?text=${encodeURIComponent(pretty)}`;
-const mailto = `mailto:hello@jennyscleaning.com?subject=${encodeURIComponent('New Cleaning Request')}&body=${encodeURIComponent(pretty)}`;
+    // Use same-tab navigation for best reliability on mobile
+    window.location.href = waUrl;
 
+    // Fallback to email if WhatsApp can't open
+    setTimeout(() => {
+      try {
+        // If user is still on our page (WhatsApp didn't take over), send email
+        if (!document.hidden) window.location.href = mailto;
+      } catch (_) {
+        window.location.href = mailto;
+      }
+    }, 1200);
 
-// Try WhatsApp; if blocked/unavailable, fall back to email
-let win = window.open(waUrl, '_blank');
-setTimeout(() => {
-try {
-if (!win || win.closed) {
-window.location.href = mailto;
-}
-} catch (err) {
-window.location.href = mailto;
-}
-}, 1200);
-
-
-form.reset();
-closeModal();
-});
-const data = Object.fromEntries(new FormData(form).entries());
-const name = data.name || 'Friend';
-const phone = data.phone || '';
-const email = data.email || '';
-const city = data.city || '';
-const service = data.service || '';
-
-
-const msg = `New cleaning request from ${name}%0A` +
-(phone ? `Phone: ${phone}%0A` : '') +
-(email ? `Email: ${email}%0A` : '') +
-(city ? `City: ${city}%0A` : '') +
-(service ? `Desired Service: ${service}%0A` : '') +
-`
-Sent from Jenny's Cleaning website.`;
-
-
-// Open WhatsApp chat with prefilled message
-const waUrl = `https://wa.me/15306476042?text=${encodeURIComponent(msg)}`;
-window.open(waUrl, '_blank');
-
-
-// Optional UX feedback
-alert(`Thanks, ${name}! We'll message you back within 24 hours.`);
-form.reset();
-closeModal();
-});const data=Object.fromEntries(new FormData(form).entries());alert(`Thanks, ${data.name||'friend'}! We'll be in touch within 24 hours.`);form.reset();closeModal()});
+    form.reset();
+  });
+})();
 </script>
       </div>
     </div>
