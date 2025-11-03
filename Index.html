@@ -139,7 +139,7 @@
         <a href="#services">Services</a>
         <a href="#testimonials">Testimonials</a>
         <a href="#contact" class="cta-btn">Contact Us</a>
-        <a href="#" class="call-btn" href="tel:6503894172">Call Now!</a>
+        <a= class="call-btn" href="tel:6503894172">Call Now!</a>
       </nav>
       <button class="hamburger" aria-label="Open Menu" onclick="toggleMenu()">☰</button>
     </div>
@@ -285,7 +285,7 @@
       <h3 class="section-title">Contact Us</h3>
       <p class="section-sub">Tell us a bit about your space and we’ll send a personalized quote within 24 hours.</p>
       <div class="card">
-        <form onsubmit="submitQuote(event)">
+        <form id="contactForm">
           <div class="two-col">
             <div>
               <label for="name">Name</label>
@@ -355,8 +355,8 @@
 <script>
 (function () {
   const form = document.getElementById('contactForm');
-  const WHATSAPP_NUMBER = '15306476042'; // <-- your number in E.164 (1 + area code + number)
-  const FALLBACK_EMAIL  = 'libby.wilke@gmail.com'; // <-- change to your inbox
+  const WHATSAPP_NUMBER = '15306476042';      // 1 + area code + number
+  const FALLBACK_EMAIL  = 'libby.wilke@gmail.com';
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -378,21 +378,23 @@ ${fd.get('message') || ''}
 
 Sent from Jenny's Cleaning website.`;
 
-    const waUrl   = `https://wa.me/${15306476042}?text=${encodeURIComponent(pretty)}`;
-    const mailto  = `mailto:${libby.wilke@gmail.com}?subject=${encodeURIComponent('New Cleaning Request')}&body=${encodeURIComponent(pretty)}`;
+    // Build URLs using the variables above (no bare ${email@domain})
+    const waUrl  = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(pretty);
+    const mailto = 'mailto:' + FALLBACK_EMAIL
+                 + '?subject=' + encodeURIComponent('New Cleaning Request')
+                 + '&body='    + encodeURIComponent(pretty);
 
-    // Use same-tab navigation for best reliability on mobile
+    // Same-tab navigation → more reliable on mobile
     window.location.href = waUrl;
 
-    // Fallback to email if WhatsApp can't open
+    // Fallback to email if WhatsApp didn’t take over
     setTimeout(() => {
       try {
-        // If user is still on our page (WhatsApp didn't take over), send email
         if (!document.hidden) window.location.href = mailto;
       } catch (_) {
         window.location.href = mailto;
       }
-    }, 1200);
+    }, 1500);
 
     form.reset();
   });
