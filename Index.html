@@ -356,7 +356,7 @@
 (function () {
   const form = document.getElementById('contactForm');
   const WHATSAPP_NUMBER = '15306476042'; // <-- your number in E.164 (1 + area code + number)
-  const FALLBACK_EMAIL  = 'libby.wilke@gmail.com'; // <-- change to your inbox
+  const FALLBACK_EMAIL  = 'hello@jennyscleaning.com'; // <-- change to your inbox
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -378,7 +378,7 @@ ${fd.get('message') || ''}
 
 Sent from Jenny's Cleaning website.`;
 
-    const waUrl   = `https://wa.me/$5306476042?text=${encodeURIComponent(pretty)}`;
+    const waUrl   = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(pretty)}`;
     const mailto  = `mailto:${FALLBACK_EMAIL}?subject=${encodeURIComponent('New Cleaning Request')}&body=${encodeURIComponent(pretty)}`;
 
     // Use same-tab navigation for best reliability on mobile
