@@ -7,7 +7,7 @@
   <meta name="description" content="Jenny's Cleaning provides reliable, eco‑friendly house cleaning: standard, deep, move‑in/move‑out, and recurring services. Free quotes. Hablamos Español!" />
   <meta name="theme-color" content="#0ea5e9">
   <!-- Open Graph -->
-  <meta property="og:title" content="Jenny's Cleaning — Sparkling Houses & Homes">
+  <meta property="og:title" content="Jenny's Cleaning — Sparkling Houses & Homeso>
   <meta property="og:description" content="Reliable, eco‑friendly house cleaning. Free quotes.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://example.com/">
@@ -280,30 +280,39 @@
   </section>
 
   <!-- Contact -->
-  <section id="contact" style="background:var(--bg-2)">
-    <div class="container">
-      <h3 class="section-title">Contact Us</h3>
-      <p class="section-sub">Tell us a bit about your space and we’ll send a personalized quote within 24 hours.</p>
-      <div class="card">
-        <form id="contactForm">
-          <div class="two-col">
-            <div>
-              <label for="name">Name</label>
-              <input id="name" name="name" placeholder="Your full name" required>
-            </div>
-            <div>
-              <label for="email">Email</label>
-              <input id="email" type="email" name="email" placeholder="you@email.com" required>
-            </div>
+<section id="contact" style="background:var(--bg-2)">
+  <div class="container">
+    <h3 class="section-title">Contact Us</h3>
+    <p class="section-sub">Tell us a bit about your space and we’ll send a personalized quote within 24 hours.</p>
+
+    <div class="card">
+      <!-- Netlify form -->
+      <form id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact" />
+        <p hidden aria-hidden="true">
+          Don’t fill this out if you’re human: <input name="bot-field" />
+        </p>
+
+        <!-- Contact fields -->
+        <div class="two-col">
+          <div>
+            <label for="name">Name</label>
+            <input id="name" name="name" placeholder="Your full name" required>
           </div>
-          <div class="two-col">
-            <div>
-              <label for="phone">Phone</label>
-              <input id="phone" name="phone" placeholder="(555) 123‑4567">
-            </div>
-            <div>
-              <label for="city">City</label>
-              <select id="city" name="city" required>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" placeholder="you@email.com" required>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div>
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" placeholder="(555) 123-4567">
+          </div>
+          <div>
+            <label for="city">City</label>
+            <select id="city" name="city" required>
               <option value="">Select your city</option>
               <option>San Leandro</option>
               <option>Hayward</option>
@@ -311,93 +320,111 @@
               <option>Newark</option>
               <option>Fremont</option>
               <option>Milpitas</option>
-              </select>
-              </div>
-            <div>
-              <label for="service">Service Type</label>
-              <select id="service" name="service">
-                <option>Standard Clean</option>
-                <option>Deep Clean</option>
-                <option>Move‑In / Move‑Out</option>
-                <option>Office / Commercial</option>
-                <option>Post‑Renovation</option>
-              </select>
-            </div>
+            </select>
           </div>
-          <div class="two-col">
-            <div>
-              <label for="sqft">Approx. Size (sq ft)</label>
-              <input id="sqft" name="sqft" placeholder="e.g., 1,500">
-            </div>
-            <div>
-              <label for="frequency">Frequency</label>
-              <select id="frequency" name="frequency">
-                <option>One‑time</option>
-                <option>Weekly</option>
-                <option>Bi‑weekly</option>
-                <option>Monthly</option>
-              </select>
-            </div>
+        </div>
+
+        <div class="two-col">
+          <div>
+            <label for="service">Desired Service</label>
+            <select id="service" name="service">
+              <option>Standard Cleaning</option>
+              <option>Deep Clean</option>
+              <option>Move-Out / Move-In Cleaning</option>
+              <option>Party / Special Occasion</option>
+            </select>
           </div>
           <div>
             <label for="date">Preferred Date</label>
             <input type="date" id="date" name="date" />
           </div>
-          <div>
-            <label for="message">Notes</label>
-            <textarea id="message" name="message" placeholder="Tell us about bedrooms/bathrooms, pets, special requests, access codes, etc."></textarea>
-          </div>
-          <button type="submit" class="cta-btn" style="justify-self:start">Send Request</button>
-          <p class="notice">
-  Prefer to call? 
-  <strong><a href="tel:16503894172" style="color:inherit;text-decoration:none;">(650) 389-4172</a></strong> • Mon–Fri 8am–6pm</p>
-        </form>
+        </div>
+
+        <div>
+          <label for="message">Notes</label>
+          <textarea id="message" name="message" placeholder="Tell us about bedrooms/bathrooms, pets, special requests, access codes, etc."></textarea>
+        </div>
+
+        <!-- Buttons -->
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-top:1rem;">
+          <!-- Email submission button -->
+          <button type="submit" class="cta-btn" style="background:#0ea5e9;border:none;color:white;padding:.7rem 1.2rem;border-radius:999px;font-weight:700;cursor:pointer;">
+            Send to Jenny’s Email
+          </button>
+
+          <!-- WhatsApp button -->
+          <a href="#" id="whatsappBtn" style="background:#25d366;color:white;padding:.7rem 1.2rem;border-radius:999px;font-weight:700;text-decoration:none;">
+            Message via WhatsApp
+          </a>
+        </div>
+
+        <p class="notice" style="margin-top:1rem;">
+          Prefer to call? 
+          <strong><a href="tel:16503894172" style="color:inherit;text-decoration:none;">(650) 389-4172</a></strong> • Mon–Fri 8am–6pm
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- WhatsApp + Netlify logic -->
 <script>
-(function () {
-  const form = document.getElementById('contactForm');
-  const WHATSAPP_NUMBER = '15306476042';      // 1 + area code + number
-  const FALLBACK_EMAIL  = 'libby.wilke@gmail.com';
+(function(){
+  const waBtn = document.getElementById('whatsappBtn');
+  const form  = document.getElementById('contactForm');
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
+  // WhatsApp send
+  if(waBtn && form){
+    waBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      const fd = new FormData(form);
+      const name = fd.get('name') || '';
+      const email = fd.get('email') || '';
+      const phone = fd.get('phone') || '';
+      const city = fd.get('city') || '';
+      const service = fd.get('service') || '';
+      const date = fd.get('date') || '';
+      const msg = fd.get('message') || '';
 
-    const fd = new FormData(form);
-    const pretty =
-`New cleaning request
-Name: ${fd.get('name') || ''}
-Phone: ${fd.get('phone') || ''}
-Email: ${fd.get('email') || ''}
-City: ${fd.get('city') || ''}
-Service: ${fd.get('service') || ''}
-Sq Ft: ${fd.get('sqft') || ''}
-Frequency: ${fd.get('frequency') || ''}
-Preferred Date: ${fd.get('date') || ''}
+      const text = `New cleaning inquiry:%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}%0ACity: ${city}%0AService: ${service}%0ADate: ${date}%0A%0AMessage:%0A${msg}`;
+      const whatsappNumber = '16503894172'; // Jenny’s business number
+      const waUrl = `https://wa.me/${whatsappNumber}?text=${text}`;
+      window.open(waUrl, '_blank');
+    });
+  }
 
-Notes:
-${fd.get('message') || ''}
+  // Netlify form AJAX submission
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      const fd = new FormData(form);
+      if(!fd.get('form-name')) fd.append('form-name', form.getAttribute('name') || 'contact');
 
-Sent from Jenny's Cleaning website.`;
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(fd).toString()
+      })
+      .then(() => {
+        showToast(\"Thanks! Your request was sent. We'll reply within 24 hours.\");
+        form.reset();
+      })
+      .catch((err) => {
+        console.error('Form submit failed', err);
+        showToast('Hmm, something went wrong. Please email hello@jennyscleaning.com');
+      });
+    });
 
-    // Build URLs using the variables above (no bare ${email@domain})
-    const waUrl  = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(pretty);
-    const mailto = 'mailto:' + FALLBACK_EMAIL
-                 + '?subject=' + encodeURIComponent('New Cleaning Request')
-                 + '&body='    + encodeURIComponent(pretty);
-
-    // Same-tab navigation → more reliable on mobile
-    window.location.href = waUrl;
-
-    // Fallback to email if WhatsApp didn’t take over
-    setTimeout(() => {
-      try {
-        if (!document.hidden) window.location.href = mailto;
-      } catch (_) {
-        window.location.href = mailto;
-      }
-    }, 1500);
-
-    form.reset();
-  });
+    const toast = document.createElement('div');
+    toast.setAttribute('id','toast');
+    toast.style.cssText = 'position:fixed;left:50%;transform:translateX(-50%);bottom:20px;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.15);display:none;z-index:1000;';
+    document.body.appendChild(toast);
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.style.display='block';
+      setTimeout(()=> toast.style.display='none', 3500);
+    }
+  }
 })();
 </script>
       </div>
