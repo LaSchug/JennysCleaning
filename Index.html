@@ -293,7 +293,7 @@
           Don’t fill this out if you’re human: <input name="bot-field" />
         </p>
 
-        <!-- Contact fields -->
+        <!-- Fields -->
         <div class="two-col">
           <div>
             <label for="name">Name</label>
@@ -347,21 +347,21 @@
 
         <!-- Buttons -->
         <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-top:1rem;">
-          <!-- Email submission button -->
+          <!-- Email submit button -->
           <button type="submit" class="cta-btn" style="background:#0ea5e9;border:none;color:white;padding:.7rem 1.2rem;border-radius:999px;font-weight:700;cursor:pointer;">
-            Submit Request
+            Send to Jenny’s Email
           </button>
-          <p>Or</p>
 
-          <!-- WhatsApp button -->
-          <a href="#" id="whatsappBtn" style="background:#25d366;color:white;padding:.7rem 1.2rem;border-radius:999px;font-weight:700;text-decoration:none;">
-            Submit via WhatsApp
+          <!-- WhatsApp button with icon -->
+          <a id="whatsappBtn" href="#" 
+            style="display:inline-flex;align-items:center;gap:.5rem;background:#25d366;color:white;padding:.7rem 1.2rem;border-radius:999px;font-weight:700;text-decoration:none;cursor:pointer;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:20px;height:20px;">
+            Message via WhatsApp
           </a>
-          <p>opens WhatsApp</p>
         </div>
 
         <p class="notice" style="margin-top:1rem;">
-          Prefer to call? 
+          Prefer to call?
           <strong><a href="tel:16503894172" style="color:inherit;text-decoration:none;">(650) 389-4172</a></strong> • Mon–Fri 8am–6pm
         </p>
       </form>
@@ -369,13 +369,12 @@
   </div>
 </section>
 
-<!-- WhatsApp + Netlify logic -->
+<!-- WhatsApp click logic -->
 <script>
 (function(){
   const waBtn = document.getElementById('whatsappBtn');
-  const form  = document.getElementById('contactForm');
+  const form  = document.querySelector('form[name=\"contact\"]');
 
-  // WhatsApp send
   if(waBtn && form){
     waBtn.addEventListener('click', function(e){
       e.preventDefault();
@@ -390,42 +389,9 @@
 
       const text = `New cleaning inquiry:%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}%0ACity: ${city}%0AService: ${service}%0ADate: ${date}%0A%0AMessage:%0A${msg}`;
       const whatsappNumber = '16503894172'; // Jenny’s business number
-      const waUrl = `https://wa.me/${6503894172}?text=${text}`;
+      const waUrl = \`https://wa.me/\${16503894172}?text=\${text}\`;
       window.open(waUrl, '_blank');
     });
-  }
-
-  // Netlify form AJAX submission
-  if(form){
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      const fd = new FormData(form);
-      if(!fd.get('form-name')) fd.append('form-name', form.getAttribute('name') || 'contact');
-
-      fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(fd).toString()
-      })
-      .then(() => {
-        showToast(\"Thanks! Your request was sent. We'll reply within 24 hours.\");
-        form.reset();
-      })
-      .catch((err) => {
-        console.error('Form submit failed', err);
-        showToast('Hmm, something went wrong. Please email libby.wilke@gmail.com');
-      });
-    });
-
-    const toast = document.createElement('div');
-    toast.setAttribute('id','toast');
-    toast.style.cssText = 'position:fixed;left:50%;transform:translateX(-50%);bottom:20px;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.15);display:none;z-index:1000;';
-    document.body.appendChild(toast);
-    function showToast(msg){
-      toast.textContent = msg;
-      toast.style.display='block';
-      setTimeout(()=> toast.style.display='none', 3500);
-    }
   }
 })();
 </script>
